@@ -1,0 +1,44 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Local environment & secrets
+.env
+.env.*
+!.env.example
+
+# Databases & Vector store
+data/chroma/
+data/document_registry.json
+*.db
+*.sqlite
+*.sqlite3
+
+# Planning / binary artifacts
+AI_Engineer_Project_Notes_Steps_1_10.docx
+
+# Cloud IDE & workspace config
+.idea/
+.vscode/
+.gemini/
+
+# Frontend (Next.js) build artifacts
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# Node
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test & subagent traces
+.playwright-mcp/

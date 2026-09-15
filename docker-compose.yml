@@ -1,0 +1,123 @@
+# =====================================================================
+# Enterprise Support AI Agent: Docker Compose Orchestration
+# Phase 10: Docker Containerization Foundation
+# =====================================================================
+
+services:
+  # -------------------------------------------------------------------
+  # 1. PostgreSQL Database Service
+  # -------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: enterprise_support_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-enterprise_support}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      # Named persistent volume preserving database state across container lifecycle
+      - postgres_data:/var/lib/postgresql/data
+      # Automated schema & seed initialization scripts executed on initial startup
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+    networks:
+      - enterprise_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-enterprise_support}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # -------------------------------------------------------------------
+  # 2. FastAPI REST Backend Service
+  # -------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: enterprise_support_backend
+    restart: unless-stopped
+    environment:
+      # Internal Docker DNS host referencing postgres service
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-enterprise_support}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      # Dedicated LangGraph PostgreSQL checkpointing
+      USE_POSTGRES_CHECKPOINT: ${USE_POSTGRES_CHECKPOINT:-1}
+      CHECKPOINT_DB_URL: ${CHECKPOINT_DB_URL:-postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-enterprise_support}}
+      # ChromaDB Persistent Storage path
+      CHROMA_PATH: /app/data/chroma
+      # LLM Provider Configuration
+      LLM_API_KEY: ${LLM_API_KEY:-${GROQ_API_KEY:-}}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      # CORS Policy
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+    ports:
+      - "8000:8000"
+    volumes:
+      # Named persistent volume preserving ChromaDB vector embeddings
+      - chroma_data:/app/data/chroma
+    networks:
+      - enterprise_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  # -------------------------------------------------------------------
+  # 3. Next.js Frontend Service
+  # -------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+    container_name: enterprise_support_frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    networks:
+      - enterprise_network
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+
+# ---------------------------------------------------------------------
+# Named Persistent Storage Volumes
+# ---------------------------------------------------------------------
+volumes:
+  postgres_data:
+    name: enterprise_support_postgres_data
+  chroma_data:
+    name: enterprise_support_chroma_data
+
+# ---------------------------------------------------------------------
+# Isolated Container Network
+# ---------------------------------------------------------------------
+networks:
+  enterprise_network:
+    name: enterprise_support_network
+    driver: bridge

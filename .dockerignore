@@ -1,0 +1,50 @@
+# Git & Version Control
+.git
+.gitignore
+
+# Python Virtual Environments & Caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Frontend Subdirectory (Built via dedicated context ./frontend)
+frontend/
+node_modules/
+
+# Secrets and Local Overrides
+.env
+.env.local
+*.pem
+*.key
+
+# Tests and Test Artifacts
+tests/
+.playwright-mcp/
+
+# IDE & Editor Configs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Documentation & Office files
+*.docx
+*.pdf
+FINAL_TEST_REPORT.md
+PERFORMANCE_REPORT.md
+TESTING_PLAN.md
+DEMO_GUIDE.md
+DOCKER_FOUNDATION_REPORT.md
+
+# ChromaDB Runtime Persistence (mounted via Docker named volume)
+data/chroma/

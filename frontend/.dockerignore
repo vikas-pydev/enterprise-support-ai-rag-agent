@@ -1,0 +1,16 @@
+node_modules
+.next
+coverage
+.git
+.gitignore
+*.tsbuildinfo
+__tests__
+vitest.config.ts
+vitest.setup.ts
+.env
+.env*
+.env*.local
+README.md
+AGENTS.md
+CLAUDE.md
+

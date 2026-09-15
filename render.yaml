@@ -1,0 +1,89 @@
+# =====================================================================
+# Enterprise Support AI Agent: Render Deployment Blueprint
+# Phase 11: Cloud Manifest & Infrastructure-as-Code (IaC)
+# =====================================================================
+
+databases:
+  # -------------------------------------------------------------------
+  # 1. Render Managed PostgreSQL Database
+  # -------------------------------------------------------------------
+  - name: enterprise-support-db
+    databaseName: enterprise_support
+    user: enterprise_support_user
+    plan: starter
+    region: oregon
+    ipAllowList: [] # Accessible within Render internal network
+
+services:
+  # -------------------------------------------------------------------
+  # 2. FastAPI REST Backend Service
+  # -------------------------------------------------------------------
+  - type: web
+    name: enterprise-support-backend
+    runtime: docker
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    plan: starter
+    region: oregon
+    # Strictly exactly 1 instance: ChromaDB embedded SQLite requires single-writer filesystem
+    numInstances: 1
+    healthCheckPath: /health
+    disk:
+      name: chroma-data
+      mountPath: /app/data/chroma
+      sizeGB: 1
+    # Idempotent schema initialization before container starts serving traffic
+    preDeployCommand: python -m app.database.bootstrap
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: CHROMA_PATH
+        value: /app/data/chroma
+      - key: USE_POSTGRES_CHECKPOINT
+        value: "1"
+      # Managed database connection strings automatically resolved from Render DB
+      - key: DATABASE_URL
+        fromDatabase:
+          name: enterprise-support-db
+          property: connectionString
+      - key: CHECKPOINT_DB_URL
+        fromDatabase:
+          name: enterprise-support-db
+          property: connectionString
+      - key: DB_SSLMODE
+        value: require
+      # Runtime secrets: sync: false ensures secrets are supplied via Render Dashboard
+      - key: LLM_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: LLM_MODEL
+        value: openai/gpt-oss-20b
+      - key: CORS_ORIGINS
+        value: https://enterprise-support-frontend.onrender.com
+      # Demo seeding disabled by default in cloud production to prevent overwrites
+      - key: SEED_DEMO_DATA
+        value: "0"
+
+  # -------------------------------------------------------------------
+  # 3. Next.js Frontend Service
+  # -------------------------------------------------------------------
+  - type: web
+    name: enterprise-support-frontend
+    runtime: docker
+    dockerfilePath: frontend/Dockerfile
+    dockerContext: frontend
+    plan: starter
+    region: oregon
+    numInstances: 1
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production
+      # Points client browser requests to the backend public HTTPS service
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://enterprise-support-backend.onrender.com
