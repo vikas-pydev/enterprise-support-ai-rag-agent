@@ -54,7 +54,7 @@ export function MessageComposer({
     <div className="w-full relative">
       {/* Loading Status Pill */}
       {isLoading && (
-        <div className="mb-2 flex items-center justify-center gap-2 text-xs text-cyan-600 dark:text-cyan-400 font-mono animate-pulse">
+        <div className="mb-2 flex items-center justify-center gap-2 text-xs text-[#368F88] dark:text-[#A9DED5] font-mono animate-pulse">
           <Loader2 className="w-3.5 h-3.5 animate-spin" />
           <span>{loadingStage || 'Searching policy knowledge base & generating grounded answer...'}</span>
         </div>
@@ -63,12 +63,12 @@ export function MessageComposer({
       {/* Composer Input Box */}
       <form
         onSubmit={handleSubmit}
-        className={`relative rounded-3xl border transition-all duration-200 backdrop-blur-md ${
+        className={`relative rounded-2xl border transition-colors ${
           isLoading
-            ? 'bg-slate-100/60 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 opacity-80'
+            ? 'bg-[#F8F6F2] dark:bg-[#1B1E24] border-[#E9E5DF] dark:border-[#2F3540] opacity-80'
             : isOverLimit
-            ? 'bg-white dark:bg-slate-900/80 border-rose-500/80 ring-1 ring-rose-500/30'
-            : 'bg-white dark:bg-slate-900/80 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700/80 focus-within:border-cyan-500/80 focus-within:ring-2 focus-within:ring-cyan-500/30'
+            ? 'bg-[#FFFFFF] dark:bg-[#1B1E24] border-rose-400 ring-1 ring-rose-400/30'
+            : 'bg-[#FFFFFF] dark:bg-[#1B1E24] border-[#E9E5DF] dark:border-[#2F3540] hover:border-[#A9DED5]/70 dark:hover:border-[#368F88]/70 focus-within:border-[#A9DED5] dark:focus-within:border-[#368F88] focus-within:ring-2 focus-within:ring-[#A9DED5]/30 dark:focus-within:ring-[#368F88]/20 shadow-[0_1px_3px_rgba(38,49,66,0.03)]'
         }`}
       >
         <textarea
@@ -80,19 +80,19 @@ export function MessageComposer({
           disabled={isLoading}
           aria-label="Policy Question Input"
           placeholder={isLoading ? 'Awaiting assistant response...' : placeholder}
-          className="w-full bg-transparent px-4 pt-3.5 pb-10 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 resize-none outline-none focus:outline-none min-h-[56px] max-h-[180px]"
+          className="w-full bg-transparent px-4 pt-3 pb-10 text-xs sm:text-sm text-[#263142] dark:text-[#EBEFF5] placeholder-[#9299A3] dark:placeholder-[#6E7887] resize-none outline-none focus:outline-none min-h-[52px] max-h-[180px] leading-relaxed"
         />
 
         {/* Bottom Toolbar inside composer */}
         <div className="absolute bottom-2.5 left-4 right-3 flex items-center justify-between pointer-events-none">
           {/* Character Count & Shortcut Hint */}
-          <div className="flex items-center gap-2 text-[11px] font-mono text-slate-400 dark:text-slate-500 pointer-events-auto select-none">
+          <div className="flex items-center gap-2 text-[11px] font-mono text-[#9299A3] dark:text-[#6E7887] pointer-events-auto select-none">
             <span className="hidden sm:inline-flex items-center gap-1">
-              <CornerDownLeft className="w-3 h-3 text-slate-400" />
+              <CornerDownLeft className="w-3 h-3 text-[#9299A3] dark:text-[#6E7887]" />
               <span>Enter to send, Shift+Enter for newline</span>
             </span>
             {input.length > 0 && (
-              <span className={`text-[10px] font-semibold ${isOverLimit ? 'text-rose-500 font-bold' : 'text-slate-500'}`}>
+              <span className={`text-[10px] font-medium ${isOverLimit ? 'text-rose-600 font-bold' : 'text-[#697582] dark:text-[#9CA6B5]'}`}>
                 {input.length}/1000
               </span>
             )}
@@ -104,7 +104,7 @@ export function MessageComposer({
               <button
                 type="button"
                 onClick={() => setInput('')}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-[#9299A3] hover:text-[#263142] dark:hover:text-[#EBEFF5] hover:bg-[#F8F6F2] dark:hover:bg-[#282D37] transition-colors cursor-pointer"
                 title="Clear input"
                 aria-label="Clear input"
               >
@@ -116,14 +116,14 @@ export function MessageComposer({
               type="submit"
               disabled={!canSubmit}
               aria-label="Send Policy Question"
-              className={`inline-flex items-center justify-center p-2 rounded-2xl font-medium transition-all ${
+              className={`inline-flex items-center justify-center p-2 rounded-xl font-medium transition-colors ${
                 canSubmit
-                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500 cursor-pointer active:scale-95'
-                  : 'bg-slate-200 dark:bg-slate-800/80 text-slate-400 cursor-not-allowed opacity-60'
+                  ? 'bg-[#368F88] hover:bg-[#2B7771] text-white shadow-[0_1px_2px_rgba(38,49,66,0.05)] cursor-pointer'
+                  : 'bg-[#F8F6F2] dark:bg-[#21252D] text-[#9299A3] dark:text-[#6E7887] cursor-not-allowed opacity-60'
               }`}
             >
               {isLoading ? (
-                <Loader2 className="w-4 h-4 animate-spin text-cyan-400" />
+                <Loader2 className="w-4 h-4 animate-spin text-white" />
               ) : (
                 <Send className="w-4 h-4" />
               )}
@@ -134,4 +134,3 @@ export function MessageComposer({
     </div>
   );
 }
-

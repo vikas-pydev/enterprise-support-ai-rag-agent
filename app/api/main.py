@@ -1,5 +1,6 @@
 import os
 import logging
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -40,6 +41,41 @@ from app.agent import (
 
 logger = logging.getLogger(__name__)
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Deterministic startup initialization: auto-seeds ChromaDB and verifies DB."""
+    # 1. Deterministic ChromaDB auto-seed if vector collection is empty
+    try:
+        from app.vector_store import collection
+        from app.ingestion import ingest_directory
+        if collection is not None and collection.count() == 0:
+            docs_dir = os.getenv("DOCUMENTS_DIR", "data/documents")
+            if os.path.isdir(docs_dir):
+                logger.info("ChromaDB vector store is empty on startup. Auto-seeding from %s...", docs_dir)
+                summary = ingest_directory(docs_dir, reset=False)
+                logger.info(
+                    "Auto-seeded ChromaDB: %s chunks stored from %s documents.",
+                    summary.get("total_chunks", 0),
+                    summary.get("total_documents", 0),
+                )
+    except Exception as e:
+        logger.warning("Startup ChromaDB auto-seeding check skipped or encountered error: %s", e)
+
+    # 2. Idempotent PostgreSQL schema bootstrap if database is reachable
+    try:
+        from app.database.bootstrap import bootstrap_database
+        from app.database.config import DEFAULT_DB_CONFIG
+        from app.database.connection import test_connection
+        if test_connection(DEFAULT_DB_CONFIG):
+            seed_demo = os.getenv("SEED_DEMO_DATA", "0").lower() in ("1", "true", "yes")
+            bootstrap_database(config=DEFAULT_DB_CONFIG, seed_demo=seed_demo)
+    except Exception as e:
+        logger.info("Startup database auto-bootstrap skipped: %s", e)
+
+    yield
+
+
 # Initialize FastAPI application
 app = FastAPI(
     title="Enterprise Support AI Agent API",
@@ -51,6 +87,7 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
+    lifespan=lifespan,
 )
 
 # Configure CORS
@@ -86,8 +123,24 @@ async def database_error_handler(request: Request, exc: DatabaseError):
 
 
 # =====================================================================
-# 1. HEALTH ENDPOINT
+# 1. SYSTEM HEALTH & ROOT ENDPOINTS
 # =====================================================================
+
+@app.get(
+    "/",
+    tags=["System"],
+    summary="API Root & Service Information",
+    description="Returns service metadata, health status, and active documentation endpoints.",
+)
+async def root():
+    return {
+        "name": "Enterprise Support AI Agent API",
+        "status": "healthy",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "health": "/health",
+    }
+
 
 @app.get(
     "/health",

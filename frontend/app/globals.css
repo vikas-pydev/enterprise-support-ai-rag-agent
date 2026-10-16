@@ -3,23 +3,121 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --card-border: rgba(226, 232, 240, 0.9);
-  --muted-text: #64748b;
-  --accent-cyan: #0891b2;
-  --accent-indigo: #4f46e5;
+  /* Canvas & Warm Ivory / Off-White Backgrounds */
+  --background: #F5F3EF;          /* Main application canvas (warm ivory) */
+  --canvas-bg: #F5F3EF;
+  --sidebar-bg: #FCFAF7;         /* Sidebar surface (warm off-white) */
+  --surface-primary: #FFFEFC;    /* Primary card & workspace surface (warm white) */
+  --surface-secondary: #F8F6F2;  /* Secondary subtle surface */
+  --surface-input: #FFFFFF;      /* Input fields */
+  --border-subtle: #E9E5DF;      /* Fine neutral border */
+  --divider: #E9E5DF;
+
+  /* Typography */
+  --foreground: #263142;         /* Primary text (charcoal navy) */
+  --muted-text: #697582;         /* Secondary text */
+  --subtle-text: #9299A3;        /* Muted metadata */
+
+  /* Mint & Seafoam Accents */
+  --mint-bg: #E5F5F1;            /* Pale mint background */
+  --mint-soft: #C7E9E2;          /* Soft mint accent */
+  --mint-primary: #A9DED5;       /* Primary mint accent */
+  --teal-interactive: #368F88;   /* Stronger teal for interactive states */
+  --teal-interactive-hover: #2B7771;
+
+  /* Supporting Pastel Palette (Icon Containers & Badges) */
+  --pastel-pink: #E8C7D4;
+  --pastel-lavender: #DCCEEF;
+  --pastel-peach: #F7C9B8;
+  --pastel-yellow: #F2E58A;
+  --pastel-sage: #CFE5D6;
+  --pastel-blue: #DCE7F7;
+
+  /* Semantic Worker & Status Colors */
+  --worker-hr: #7C3AED;
+  --worker-hr-bg: #DCCEEF;
+  --worker-employee: #2563EB;
+  --worker-employee-bg: #DCE7F7;
+  --worker-travel: #368F88;
+  --worker-travel-bg: #C7E9E2;
+  --status-pending: #B45309;
+  --status-pending-bg: #FEF3C7;
+  --status-approved: #2F855A;
+  --status-approved-bg: #CFE5D6;
+  --status-error: #C53030;
+  --status-error-bg: #FDE8E8;
+
+  /* Shadows & Rings */
+  --shadow-subtle: 0 1px 3px rgba(38, 49, 66, 0.04), 0 1px 2px rgba(38, 49, 66, 0.02);
+  --shadow-card: 0 2px 8px rgba(38, 49, 66, 0.04), 0 1px 3px rgba(38, 49, 66, 0.02);
+  --shadow-elevated: 0 12px 30px -4px rgba(38, 49, 66, 0.07), 0 4px 6px -2px rgba(38, 49, 66, 0.03);
+
+  /* Legacy variable mappings for backward compatibility */
+  --accent-cyan: #368F88;
+  --accent-cyan-hover: #2B7771;
+  --accent-indigo: #368F88;
+  --accent-teal: #368F88;
+  --card-bg: #FFFEFC;
+  --card-border: #E9E5DF;
 }
 
 .dark {
-  --background: #030712;
-  --foreground: #f8fafc;
-  --card-bg: rgba(15, 23, 42, 0.7);
-  --card-border: rgba(30, 41, 59, 0.8);
-  --muted-text: #94a3b8;
-  --accent-cyan: #06b6d4;
-  --accent-indigo: #6366f1;
+  /* Canvas & Warm Dark Charcoal / Slate */
+  --background: #16181D;          /* Deep warm slate/charcoal canvas */
+  --canvas-bg: #16181D;
+  --sidebar-bg: #1B1E24;         /* Sidebar surface */
+  --surface-primary: #21252D;    /* Primary card surface */
+  --surface-secondary: #282D37;  /* Secondary surface */
+  --surface-input: #1B1E24;      /* Input fields */
+  --border-subtle: #2F3540;      /* Fine subtle border */
+  --divider: #2F3540;
+
+  /* Typography */
+  --foreground: #EBEFF5;         /* Crisp light primary text */
+  --muted-text: #9CA6B5;         /* Secondary text */
+  --subtle-text: #6E7887;        /* Muted metadata */
+
+  /* Mint & Seafoam Accents */
+  --mint-bg: #1A2D2A;            /* Pale mint dark */
+  --mint-soft: #244742;          /* Soft mint dark */
+  --mint-primary: #368F88;       /* Primary mint dark */
+  --teal-interactive: #45B3A9;   /* Stronger teal for interactive states */
+  --teal-interactive-hover: #56C4BA;
+
+  /* Supporting Pastel Palette (Dark-adjusted soft tones) */
+  --pastel-pink: #4A333E;
+  --pastel-lavender: #39344D;
+  --pastel-peach: #4A3831;
+  --pastel-yellow: #4A462B;
+  --pastel-sage: #2C3B32;
+  --pastel-blue: #2B3A4E;
+
+  /* Semantic Worker & Status Colors */
+  --worker-hr: #A78BFA;
+  --worker-hr-bg: #39344D;
+  --worker-employee: #60A5FA;
+  --worker-employee-bg: #2B3A4E;
+  --worker-travel: #45B3A9;
+  --worker-travel-bg: #1A2D2A;
+  --status-pending: #FBBF24;
+  --status-pending-bg: #4A3F20;
+  --status-approved: #34D399;
+  --status-approved-bg: #2C3B32;
+  --status-error: #F87171;
+  --status-error-bg: #4A2626;
+
+  /* Shadows & Rings */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --shadow-elevated: 0 10px 25px -3px rgba(0, 0, 0, 0.45);
+
+  /* Legacy variable mappings for backward compatibility */
+  --accent-cyan: #45B3A9;
+  --accent-cyan-hover: #56C4BA;
+  --accent-indigo: #45B3A9;
+  --accent-teal: #45B3A9;
+  --card-bg: #21252D;
+  --card-border: #2F3540;
 }
 
 html {
@@ -37,14 +135,14 @@ body {
 
 /* Accessible focus ring for interactive keyboard controls */
 *:focus-visible {
-  outline: 2px solid var(--accent-indigo);
+  outline: 2px solid var(--teal-interactive);
   outline-offset: 2px;
 }
 
-/* Custom scrollbar for modern enterprise UI */
+/* Custom scrollbar for calm enterprise UI */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -52,12 +150,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(146, 153, 163, 0.28);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.6);
+  background: rgba(146, 153, 163, 0.55);
 }
 
 /* Respect user preference for reduced motion */
@@ -71,4 +169,3 @@ body {
     scroll-behavior: auto !important;
   }
 }
-

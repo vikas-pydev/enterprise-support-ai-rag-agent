@@ -20,7 +20,7 @@ export function ThemeToggle() {
       setIsDark(false);
       document.documentElement.classList.remove('dark');
     } else {
-      // Default to dark for enterprise AI feel
+      // Default to dark for test compliance
       setIsDark(true);
       document.documentElement.classList.add('dark');
     }
@@ -40,7 +40,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800" />
+      <div className="w-8 h-8 rounded-xl bg-[#F8F6F2] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540]" />
     );
   }
 
@@ -50,12 +50,12 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white bg-slate-100 dark:bg-slate-900/80 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-all cursor-pointer shadow-sm"
+      className="p-2 rounded-xl text-[#697582] hover:text-[#263142] dark:text-[#9CA6B5] dark:hover:text-[#EBEFF5] bg-[#FFFFFF] dark:bg-[#21252D] hover:bg-[#F8F6F2] dark:hover:bg-[#282D37] border border-[#E9E5DF] dark:border-[#2F3540] transition-colors cursor-pointer shadow-[0_1px_2px_rgba(38,49,66,0.03)]"
     >
       {isDark ? (
-        <Sun className="w-4 h-4 text-amber-400" />
+        <Sun className="w-4 h-4 text-[#F2E58A]" />
       ) : (
-        <Moon className="w-4 h-4 text-indigo-600" />
+        <Moon className="w-4 h-4 text-[#368F88]" />
       )}
     </button>
   );

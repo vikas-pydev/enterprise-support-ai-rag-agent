@@ -33,131 +33,131 @@ export function SystemInfoCard() {
   ];
 
   const techStack = [
-    { name: 'Next.js 16 (App Router)', category: 'Frontend', color: 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700' },
-    { name: 'TypeScript 5', category: 'Language', color: 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-500/30' },
-    { name: 'Tailwind CSS 4', category: 'Styling', color: 'bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-300 dark:border-cyan-500/30' },
-    { name: 'FastAPI', category: 'REST API', color: 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/30' },
-    { name: 'LangGraph Multi-Agent', category: 'Orchestration', color: 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-500/30' },
-    { name: 'Hybrid RAG (ChromaDB + BM25)', category: 'Retrieval', color: 'bg-violet-50 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 border-violet-300 dark:border-violet-500/30' },
-    { name: 'Cross-Encoder Reranker', category: 'Reranking', color: 'bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30' },
-    { name: 'PostgreSQL & psycopg3', category: 'Structured Data', color: 'bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border-sky-300 dark:border-sky-500/30' },
-    { name: 'Durable Checkpointing', category: 'State', color: 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-500/30' },
-    { name: 'Human-in-the-Loop Gate', category: 'Governance', color: 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-500/30' },
+    { name: 'Next.js 16 (App Router)', category: 'Frontend' },
+    { name: 'TypeScript 5', category: 'Language' },
+    { name: 'Tailwind CSS 4', category: 'Styling' },
+    { name: 'FastAPI', category: 'REST API' },
+    { name: 'LangGraph Multi-Agent', category: 'Orchestration' },
+    { name: 'Hybrid RAG (ChromaDB + BM25)', category: 'Retrieval' },
+    { name: 'Cross-Encoder Reranker', category: 'Reranking' },
+    { name: 'PostgreSQL & psycopg3', category: 'Structured Data' },
+    { name: 'Durable Checkpointing', category: 'State' },
+    { name: 'Human-in-the-Loop Gate', category: 'Governance' },
   ];
 
   return (
-    <section aria-label="System Architecture & Developer Diagnostics" className="rounded-3xl border border-slate-200 dark:border-slate-800/90 bg-white/70 dark:bg-slate-900/40 backdrop-blur-md overflow-hidden transition-all shadow-lg">
+    <section aria-label="System Architecture & Developer Diagnostics" className="rounded-2xl border border-[#E9E5DF] dark:border-[#2F3540] bg-[#FFFEFC] dark:bg-[#21252D] overflow-hidden transition-colors shadow-[0_1px_3px_rgba(38,49,66,0.03)]">
       {/* Header Accordion Toggle */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        className="w-full px-6 py-4 flex items-center justify-between gap-4 bg-slate-50 dark:bg-slate-900/70 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors text-left cursor-pointer"
+        className="w-full px-6 py-4 flex items-center justify-between gap-4 bg-[#FCFAF7] dark:bg-[#1B1E24] hover:bg-[#F8F6F2] dark:hover:bg-[#282D37] transition-colors text-left cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
+          <div className="p-2 rounded-xl bg-[#E5F5F1] dark:bg-[#1A2D2A] border border-[#C7E9E2] dark:border-[#244742] text-[#368F88] dark:text-[#A9DED5]">
             <Network className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-wide">
+              <h3 className="text-sm font-semibold text-[#263142] dark:text-[#EBEFF5] tracking-wide">
                 System Architecture &amp; Technical Overview
               </h3>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300">
-                Recruiter &amp; Engineer Showcase
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#E5F5F1] dark:bg-[#1A2D2A] border border-[#C7E9E2] dark:border-[#244742] text-[#263142] dark:text-[#A9DED5]">
+                Technical Reference
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-[#697582] dark:text-[#9CA6B5] mt-0.5 font-normal">
               Explore the end-to-end AI engineering architecture, tech stack &amp; REST service layer
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-          <span className="text-xs font-semibold hidden md:inline">
+        <div className="flex items-center gap-2 text-[#697582] dark:text-[#9CA6B5]">
+          <span className="text-xs font-medium hidden md:inline">
             {isOpen ? 'Hide Architecture Details' : 'View Architecture Details'}
           </span>
           {isOpen ? (
-            <ChevronDown className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+            <ChevronDown className="w-4 h-4 text-[#368F88] dark:text-[#A9DED5]" />
           ) : (
-            <ChevronRight className="w-4 h-4 text-slate-400" />
+            <ChevronRight className="w-4 h-4 text-[#9299A3] dark:text-[#6E7887]" />
           )}
         </div>
       </button>
 
       {/* Collapsible Architecture Body */}
       {isOpen && (
-        <div className="p-6 space-y-6 border-t border-slate-200 dark:border-slate-800/80 animate-in fade-in duration-200 text-slate-900 dark:text-slate-100">
+        <div className="p-6 space-y-6 border-t border-[#E9E5DF] dark:border-[#2F3540] animate-in fade-in duration-150 text-[#263142] dark:text-[#EBEFF5]">
           {/* Subsystem Pillars */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+            <div className="p-4 rounded-2xl bg-[#F8F6F2] dark:bg-[#1B1E24] border border-[#E9E5DF] dark:border-[#2F3540] flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 mb-2">
+                <div className="flex items-center gap-2 text-[#368F88] dark:text-[#A9DED5] mb-2">
                   <Layers className="w-4 h-4" />
-                  <span className="text-xs font-bold text-slate-900 dark:text-white">Hybrid Retrieval RAG</span>
+                  <span className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5]">Hybrid Retrieval RAG</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-[#697582] dark:text-[#9CA6B5] leading-relaxed font-normal">
                   Dense ChromaDB embeddings + Sparse BM25 fused with Reciprocal Rank Fusion ($k=60$) and scored via Cross-Encoder reranker with deterministic chunk citations.
                 </p>
               </div>
-              <span className="mt-3 text-[10px] font-mono text-cyan-600 dark:text-cyan-400/80">/api/v1/ask</span>
+              <span className="mt-3 text-[10px] font-mono text-[#368F88] dark:text-[#A9DED5]">/api/v1/ask</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+            <div className="p-4 rounded-2xl bg-[#F8F6F2] dark:bg-[#1B1E24] border border-[#E9E5DF] dark:border-[#2F3540] flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 mb-2">
+                <div className="flex items-center gap-2 text-[#368F88] dark:text-[#A9DED5] mb-2">
                   <Database className="w-4 h-4" />
-                  <span className="text-xs font-bold text-slate-900 dark:text-white">PostgreSQL Operations</span>
+                  <span className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5]">PostgreSQL Operations</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-[#697582] dark:text-[#9CA6B5] leading-relaxed font-normal">
                   Relational schema modeling employees, departments, PTO leave balance categories, and multi-currency travel expense claims with parameterized SQL safety.
                 </p>
               </div>
-              <span className="mt-3 text-[10px] font-mono text-indigo-600 dark:text-indigo-400/80">/api/v1/employees/*</span>
+              <span className="mt-3 text-[10px] font-mono text-[#368F88] dark:text-[#A9DED5]">/api/v1/employees/*</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+            <div className="p-4 rounded-2xl bg-[#F8F6F2] dark:bg-[#1B1E24] border border-[#E9E5DF] dark:border-[#2F3540] flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 mb-2">
+                <div className="flex items-center gap-2 text-[#368F88] dark:text-[#A9DED5] mb-2">
                   <Cpu className="w-4 h-4" />
-                  <span className="text-xs font-bold text-slate-900 dark:text-white">LangGraph Multi-Agent</span>
+                  <span className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5]">LangGraph Multi-Agent</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-[#697582] dark:text-[#9CA6B5] leading-relaxed font-normal">
                   Centralized Supervisor routing to specialized workers (HR Policy, Employee Records, Travel &amp; Expense) with sandboxed tool permissions and cycle protection.
                 </p>
               </div>
-              <span className="mt-3 text-[10px] font-mono text-emerald-600 dark:text-emerald-400/80">/api/v1/agent/chat</span>
+              <span className="mt-3 text-[10px] font-mono text-[#368F88] dark:text-[#A9DED5]">/api/v1/agent/chat</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+            <div className="p-4 rounded-2xl bg-[#F8F6F2] dark:bg-[#1B1E24] border border-[#E9E5DF] dark:border-[#2F3540] flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 mb-2">
+                <div className="flex items-center gap-2 text-[#368F88] dark:text-[#A9DED5] mb-2">
                   <ShieldCheck className="w-4 h-4" />
-                  <span className="text-xs font-bold text-slate-900 dark:text-white">State &amp; HITL Governance</span>
+                  <span className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5]">State &amp; HITL Governance</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-[#697582] dark:text-[#9CA6B5] leading-relaxed font-normal">
                   Durable thread checkpointing with PostgreSQL/SQLite backend and deterministic human approval gates for executive records or confidential requests.
                 </p>
               </div>
-              <span className="mt-3 text-[10px] font-mono text-amber-600 dark:text-amber-400/80">/api/v1/agent/approvals/*</span>
+              <span className="mt-3 text-[10px] font-mono text-[#368F88] dark:text-[#A9DED5]">/api/v1/agent/approvals/*</span>
             </div>
           </div>
 
           {/* Tech Stack Pills */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-1.5">
-              <Code2 className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#697582] dark:text-[#9CA6B5] mb-3 flex items-center gap-1.5">
+              <Code2 className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
               <span>Production Technology Stack</span>
             </h4>
             <div className="flex flex-wrap gap-2">
               {techStack.map((tech) => (
                 <span
                   key={tech.name}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium border ${tech.color}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-[#F8F6F2] dark:bg-[#1B1E24] border border-[#E9E5DF] dark:border-[#2F3540] text-[#263142] dark:text-[#EBEFF5]"
                 >
-                  <CheckCircle2 className="w-3 h-3 opacity-70" />
+                  <CheckCircle2 className="w-3 h-3 text-[#368F88] dark:text-[#A9DED5]" />
                   <span>{tech.name}</span>
-                  <span className="text-[10px] opacity-70 font-mono">({tech.category})</span>
+                  <span className="text-[10px] text-[#9299A3] dark:text-[#6E7887] font-mono">({tech.category})</span>
                 </span>
               ))}
             </div>
@@ -166,15 +166,15 @@ export function SystemInfoCard() {
           {/* Integrated REST Endpoint Matrix */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-                <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-[#697582] dark:text-[#9CA6B5] flex items-center gap-1.5">
+                <Terminal className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
                 <span>Configured FastAPI REST Endpoints ({endpoints.length})</span>
               </h4>
               <a
                 href={`${baseUrl}/docs`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 inline-flex items-center gap-1"
+                className="text-xs font-medium text-[#368F88] dark:text-[#A9DED5] hover:text-[#2B7771] inline-flex items-center gap-1"
               >
                 <span>Interactive Swagger UI</span>
                 <ExternalLink className="w-3 h-3" />
@@ -185,25 +185,25 @@ export function SystemInfoCard() {
               {endpoints.map((ep, idx) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between text-xs hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
+                  className="p-3 rounded-xl bg-[#F8F6F2] dark:bg-[#1B1E24] border border-[#E9E5DF] dark:border-[#2F3540] flex flex-col justify-between text-xs hover:border-[#A9DED5] dark:hover:border-[#368F88] transition-colors"
                 >
                   <div className="flex items-center justify-between gap-2 mb-1.5">
                     <span
-                      className={`font-mono font-bold text-[10px] px-2 py-0.5 rounded-md ${
+                      className={`font-mono font-semibold text-[10px] px-2 py-0.5 rounded-md ${
                         ep.method === 'GET'
-                          ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30'
+                          ? 'bg-[#CFE5D6] dark:bg-[#2C3B32] text-[#2F855A] dark:text-[#34D399] border border-[#B7D9C2] dark:border-[#3A4D42]'
                           : ep.method === 'POST'
-                          ? 'bg-cyan-100 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/30'
-                          : 'bg-rose-100 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-500/30'
+                          ? 'bg-[#E5F5F1] dark:bg-[#1A2D2A] text-[#368F88] dark:text-[#A9DED5] border border-[#C7E9E2] dark:border-[#244742]'
+                          : 'bg-[#FDE8E8] dark:bg-[#3D2525] text-[#9B1C1C] dark:text-[#F87171] border border-[#FBD5D5] dark:border-[#522828]'
                       }`}
                     >
                       {ep.method}
                     </span>
-                    <span className="font-mono text-[11px] text-slate-800 dark:text-slate-300 font-medium truncate">
+                    <span className="font-mono text-[11px] text-[#263142] dark:text-[#EBEFF5] font-medium truncate">
                       {ep.path}
                     </span>
                   </div>
-                  <div className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">{ep.desc}</div>
+                  <div className="text-[11px] text-[#697582] dark:text-[#9CA6B5] line-clamp-1 font-normal">{ep.desc}</div>
                 </div>
               ))}
             </div>
@@ -213,4 +213,3 @@ export function SystemInfoCard() {
     </section>
   );
 }
-

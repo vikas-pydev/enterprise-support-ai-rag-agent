@@ -29,8 +29,17 @@ class TestFastAPIService(unittest.TestCase):
                 cls.db_available = False
 
     # -----------------------------------------------------------------
-    # 1. System Health Endpoint
+    # 1. System Health & Root Endpoints
     # -----------------------------------------------------------------
+
+    def test_00_root_endpoint(self):
+        """Verify GET / returns 200, service metadata, and docs link."""
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data["status"], "healthy")
+        self.assertEqual(data["name"], "Enterprise Support AI Agent API")
+        self.assertIn("docs", data)
 
     def test_01_health_endpoint(self):
         """Verify GET /health returns 200 and healthy status."""

@@ -45,6 +45,11 @@ PERFORMANCE_REPORT.md
 TESTING_PLAN.md
 DEMO_GUIDE.md
 DOCKER_FOUNDATION_REPORT.md
+FREE_DEPLOYMENT_COMPATIBILITY_REPORT.md
+FREE_TIER_OPTIMIZATION_REPORT.md
 
-# ChromaDB Runtime Persistence (mounted via Docker named volume)
-data/chroma/
+# Models downloaded inside builder container stage
+data/models/
+
+# ChromaDB Runtime Persistence is baked into image for Render Free ($0)
+# data/chroma/ is intentionally included

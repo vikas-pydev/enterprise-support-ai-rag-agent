@@ -45,6 +45,7 @@ TIER_A_MODULES = [
     "tests.test_agent_graph",
     "tests.test_multi_agent",
     "tests.test_security_adversarial",
+    "tests.test_onnx_parity",
 ]
 
 # Tier B: Local integration (local DB, ChromaDB, FastAPI contracts, checkpointers)

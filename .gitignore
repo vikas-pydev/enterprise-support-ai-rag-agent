@@ -9,10 +9,13 @@ __pycache__/
 # Local environment & secrets
 .env
 .env.*
+.env*.local
 !.env.example
+!frontend/.env.example
 
 # Databases & Vector store
 data/chroma/
+data/models/
 data/document_registry.json
 *.db
 *.sqlite
@@ -20,6 +23,7 @@ data/document_registry.json
 
 # Planning / binary artifacts
 AI_Engineer_Project_Notes_Steps_1_10.docx
+*.pdf
 
 # Cloud IDE & workspace config
 .idea/
@@ -31,10 +35,17 @@ frontend/node_modules/
 frontend/.next/
 frontend/out/
 frontend/build/
+frontend/coverage/
+frontend/*.tsbuildinfo
 
 # Node
 node_modules/
 dist/
+
+# Testing & Coverage
+coverage/
+htmlcov/
+.coverage
 
 # OS
 .DS_Store

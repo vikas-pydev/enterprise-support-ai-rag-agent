@@ -1,6 +1,6 @@
 # =====================================================================
 # Enterprise Support AI Agent: FastAPI Backend Production Dockerfile
-# Phase 10: Docker Containerization Foundation (Multi-Stage Build)
+# Phase 11: ONNX Runtime CPU Inference & 512 MB Render Free Optimization
 # =====================================================================
 
 # ---------------------------------------------------------------------
@@ -10,7 +10,7 @@ FROM python:3.11-slim AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    HF_HOME=/cache/huggingface
+    MODEL_DIR=/build/data/models
 
 WORKDIR /build
 
@@ -23,14 +23,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Install CPU-only PyTorch to eliminate >4GB of unused NVIDIA CUDA runtime bloat
+# Install lightweight runtime dependencies (onnxruntime + tokenizers, NO PyTorch)
 COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
-    pip install --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
+    pip install --no-cache-dir -r requirements.txt
 
-# Pre-download and cache model weights during build for deterministic offline startup
-RUN python -c "from sentence_transformers import SentenceTransformer, CrossEncoder; SentenceTransformer('all-MiniLM-L6-v2'); CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')"
+# Pre-download and package ONNX models and tokenizers during build for deterministic offline startup
+COPY scripts/download_onnx_models.py ./scripts/
+RUN python scripts/download_onnx_models.py
 
 # ---------------------------------------------------------------------
 # Stage 2: Production Minimal Runtime
@@ -43,7 +43,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PATH="/opt/venv/bin:$PATH" \
     PORT=8000 \
     CHROMA_PATH=/app/data/chroma \
-    HF_HOME=/home/appuser/.cache/huggingface
+    MODEL_DIR=/app/data/models
 
 WORKDIR /app
 
@@ -55,19 +55,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Create unprivileged system user for non-root security
 RUN groupadd --system --gid 10001 appgroup && \
     useradd --system --uid 10001 --gid appgroup --shell /bin/bash --create-home appuser && \
-    mkdir -p /home/appuser/.cache/huggingface /app/data/chroma && \
-    chown -R appuser:appgroup /home/appuser /app
+    mkdir -p /app/data/chroma /app/data/models && \
+    chown -R appuser:appgroup /app
 
 # Copy optimized virtual environment from builder stage
 COPY --from=builder /opt/venv /opt/venv
 
-# Copy pre-downloaded model weights ensuring non-root ownership
-COPY --from=builder --chown=appuser:appgroup /cache/huggingface /home/appuser/.cache/huggingface
+# Copy pre-downloaded ONNX models from builder stage
+COPY --from=builder --chown=appuser:appgroup /build/data/models /app/data/models
 
 # Copy application source code, deterministic data, and database assets
-COPY app/ ./app/
-COPY data/ ./data/
-COPY database/ ./database/
+COPY --chown=appuser:appgroup app/ ./app/
+COPY --chown=appuser:appgroup data/ ./data/
+COPY --chown=appuser:appgroup database/ ./database/
 
 # Ensure appropriate directory permissions
 RUN chown -R appuser:appgroup /app

@@ -8,7 +8,7 @@ import { SessionControlBar } from './SessionControlBar';
 import { AgentEmptyState } from './AgentEmptyState';
 import { AgentMessage } from './AgentMessage';
 import { AgentComposer } from './AgentComposer';
-import { Bot, Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Bot, Sparkles, AlertCircle, CheckCircle2, GitBranch } from 'lucide-react';
 
 const generateNewSessionId = (): string => {
   const timestamp = Date.now().toString(36);
@@ -16,7 +16,11 @@ const generateNewSessionId = (): string => {
   return `session-agent-${timestamp}-${randomStr}`;
 };
 
-export function AgentChatWorkspace() {
+interface AgentChatWorkspaceProps {
+  initialPrompt?: string;
+}
+
+export function AgentChatWorkspace({ initialPrompt }: AgentChatWorkspaceProps) {
   const [sessionId, setSessionId] = useState<string>(generateNewSessionId);
   const [messages, setMessages] = useState<AgentChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -25,6 +29,7 @@ export function AgentChatWorkspace() {
   const [isDecisionLoading, setIsDecisionLoading] = useState<boolean>(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const initialPromptHandled = useRef<boolean>(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -191,6 +196,14 @@ export function AgentChatWorkspace() {
     }
   };
 
+  // Handle initial prompt from WorkspaceHome
+  useEffect(() => {
+    if (initialPrompt && !initialPromptHandled.current) {
+      initialPromptHandled.current = true;
+      handleSendMessage(initialPrompt);
+    }
+  }, [initialPrompt]);
+
   // =====================================================================
   // HUMAN-IN-THE-LOOP APPROVAL SUBMISSION
   // =====================================================================
@@ -252,23 +265,23 @@ export function AgentChatWorkspace() {
   };
 
   return (
-    <div className="flex flex-col h-[780px] max-h-[85vh] rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/70 shadow-2xl overflow-hidden backdrop-blur-xl transition-colors">
-      {/* Top Header & Session Bar */}
-      <div className="flex items-center justify-between px-6 py-3.5 border-b border-slate-200 dark:border-slate-800/80 bg-slate-50/80 dark:bg-slate-900/50">
+    <div className="flex flex-col h-[760px] max-h-[85vh] rounded-2xl border border-[#E9E5DF] dark:border-[#2F3540] bg-[#FFFEFC] dark:bg-[#21252D] shadow-[0_2px_8px_rgba(38,49,66,0.03)] overflow-hidden transition-colors">
+      {/* Top Header */}
+      <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-[#E9E5DF] dark:border-[#2F3540] bg-[#FCFAF7] dark:bg-[#1B1E24]">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 shadow-sm">
+          <div className="p-2 rounded-xl bg-[#DCCEEF] dark:bg-[#2E283E] border border-[#C5B4DF] dark:border-[#4B3E63] text-[#6E4E9E] dark:text-[#DCCEEF]">
             <Bot className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h2 className="text-xs sm:text-sm font-semibold text-[#263142] dark:text-[#EBEFF5]">
                 Enterprise AI Agent Workspace
               </h2>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300">
+              <span className="px-2 py-0.2 rounded-full text-[10px] font-mono font-medium bg-[#DCCEEF]/40 dark:bg-[#2E283E] border border-[#C5B4DF] dark:border-[#4B3E63] text-[#263142] dark:text-[#DCCEEF]">
                 LangGraph Multi-Agent
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-[11px] text-[#697582] dark:text-[#9CA6B5] font-normal">
               Autonomous multi-step coordinator across PostgreSQL records, policies &amp; approvals
             </p>
           </div>
@@ -290,25 +303,25 @@ export function AgentChatWorkspace() {
         <div
           className={`px-6 py-2.5 border-b text-xs flex items-center justify-between transition-all ${
             globalBanner.type === 'error'
-              ? 'bg-rose-50 dark:bg-rose-950/70 border-rose-200 dark:border-rose-500/30 text-rose-800 dark:text-rose-300'
+              ? 'bg-[#FDE8E8] dark:bg-[#3D2525] border-[#FBD5D5] dark:border-[#522828] text-[#9B1C1C] dark:text-[#F87171]'
               : globalBanner.type === 'success'
-              ? 'bg-emerald-50 dark:bg-emerald-950/70 border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300'
-              : 'bg-indigo-50 dark:bg-indigo-950/70 border-indigo-200 dark:border-indigo-500/30 text-indigo-800 dark:text-indigo-300'
+              ? 'bg-[#E5F5F1] dark:bg-[#1A2D2A] border-[#C7E9E2] dark:border-[#244742] text-[#263142] dark:text-[#A9DED5]'
+              : 'bg-[#F8F6F2] dark:bg-[#282D37] border-[#E9E5DF] dark:border-[#2F3540] text-[#263142] dark:text-[#EBEFF5]'
           }`}
         >
           <div className="flex items-center gap-2">
             {globalBanner.type === 'error' ? (
-              <AlertCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
+              <AlertCircle className="w-3.5 h-3.5 text-[#C53030] dark:text-[#F87171]" />
             ) : globalBanner.type === 'success' ? (
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
             ) : (
-              <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              <Sparkles className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
             )}
             <span className="font-medium">{globalBanner.text}</span>
           </div>
           <button
             onClick={() => setGlobalBanner(null)}
-            className="hover:opacity-75 font-mono text-xs cursor-pointer"
+            className="hover:opacity-75 font-mono text-xs cursor-pointer text-[#697582] dark:text-[#9CA6B5]"
           >
             &times;
           </button>
@@ -316,7 +329,7 @@ export function AgentChatWorkspace() {
       )}
 
       {/* Main Message Stream Container */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 scrollbar-thin bg-[#F5F3EF]/40 dark:bg-[#16181D]/40">
         {messages.length === 0 ? (
           <AgentEmptyState onSelectPrompt={handleSendMessage} disabled={isLoading} />
         ) : (
@@ -333,7 +346,7 @@ export function AgentChatWorkspace() {
       </div>
 
       {/* Sticky Bottom Composer */}
-      <div className="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800/80 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md">
+      <div className="p-3.5 sm:p-4 border-t border-[#E9E5DF] dark:border-[#2F3540] bg-[#FCFAF7] dark:bg-[#1B1E24]">
         <AgentComposer
           onSendMessage={handleSendMessage}
           isLoading={isLoading}
@@ -343,4 +356,3 @@ export function AgentChatWorkspace() {
     </div>
   );
 }
-

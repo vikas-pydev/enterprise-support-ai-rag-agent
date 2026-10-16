@@ -11,71 +11,75 @@ interface EmptyStateProps {
 export function EmptyState({ onSelectQuestion, disabled = false }: EmptyStateProps) {
   const exampleQuestions = [
     {
-      icon: <Plane className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />,
+      icon: <Plane className="w-4 h-4 text-[#368F88] dark:text-[#A9DED5]" />,
+      pastel: 'bg-[#E5F5F1] dark:bg-[#1A2D2A] border-[#C7E9E2] dark:border-[#244742]',
       category: 'Travel Policy',
       question: 'What is the meal per diem allowance for domestic travel?',
     },
     {
-      icon: <PiggyBank className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />,
+      icon: <PiggyBank className="w-4 h-4 text-[#2F855A] dark:text-[#34D399]" />,
+      pastel: 'bg-[#CFE5D6] dark:bg-[#2C3B32] border-[#B7D9C2] dark:border-[#3A4D42]',
       category: 'Benefits & 401(k)',
       question: 'How much does the company match 401(k) contributions?',
     },
     {
-      icon: <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />,
+      icon: <Clock className="w-4 h-4 text-[#B45309] dark:text-[#FBBF24]" />,
+      pastel: 'bg-[#FEF3C7] dark:bg-[#393425] border-[#FDE68A] dark:border-[#4A462B]',
       category: 'Remote Work',
       question: 'What are the core collaboration hours for remote employees?',
     },
     {
-      icon: <HeartHandshake className="w-4 h-4 text-rose-600 dark:text-rose-400" />,
+      icon: <HeartHandshake className="w-4 h-4 text-[#9B1C1C] dark:text-[#F87171]" />,
+      pastel: 'bg-[#FDE8E8] dark:bg-[#3D2525] border-[#FBD5D5] dark:border-[#522828]',
       category: 'Pet Insurance',
       question: 'What is the company pet insurance reimbursement policy?',
     },
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center py-8 sm:py-12 px-4 max-w-3xl mx-auto text-center">
+    <div className="flex flex-col items-center justify-center py-6 sm:py-10 px-4 max-w-3xl mx-auto text-center select-none">
       {/* Icon Badge */}
-      <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400 mb-4 shadow-lg shadow-cyan-500/10">
-        <BookOpen className="w-7 h-7" />
+      <div className="w-11 h-11 rounded-2xl bg-[#E5F5F1] dark:bg-[#1A2D2A] border border-[#C7E9E2] dark:border-[#244742] flex items-center justify-center text-[#368F88] dark:text-[#A9DED5] mb-3 shadow-[0_1px_2px_rgba(38,49,66,0.03)]">
+        <BookOpen className="w-5 h-5" />
       </div>
 
       {/* Main Title & Subtitle */}
-      <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+      <h2 className="text-lg sm:text-xl font-semibold text-[#263142] dark:text-[#EBEFF5] tracking-tight">
         Ask about company policies
       </h2>
-      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 max-w-xl leading-relaxed font-normal">
+      <p className="text-xs sm:text-sm text-[#697582] dark:text-[#9CA6B5] mt-1.5 max-w-xl leading-relaxed font-normal">
         Answers are synthesized strictly from indexed enterprise policy documents using hybrid semantic search and cross-encoder reranking, complete with verifiable source citations and refusal safeguards.
       </p>
 
       {/* Suggested Questions Grid */}
-      <div className="w-full mt-8">
-        <div className="flex items-center justify-center gap-2 mb-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" />
+      <div className="w-full mt-6">
+        <div className="flex items-center justify-center gap-1.5 mb-3 text-[11px] font-semibold uppercase tracking-wider text-[#9299A3] dark:text-[#6E7887]">
+          <Sparkles className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
           <span>Explore Verified Policy Inquiries</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-left">
           {exampleQuestions.map((item, idx) => (
             <button
               key={idx}
               type="button"
               disabled={disabled}
               onClick={() => onSelectQuestion(item.question)}
-              className="group relative p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-200 text-left disabled:opacity-50 disabled:pointer-events-none cursor-pointer flex flex-col justify-between shadow-sm"
+              className="group relative p-3.5 rounded-xl border border-[#E9E5DF] dark:border-[#2F3540] bg-[#FFFEFC] dark:bg-[#21252D] hover:bg-[#F8F6F2] dark:hover:bg-[#282D37] hover:border-[#A9DED5] dark:hover:border-[#368F88] transition-colors text-left disabled:opacity-50 disabled:pointer-events-none cursor-pointer flex flex-col justify-between shadow-[0_1px_2px_rgba(38,49,66,0.02)]"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <div className={`p-1 rounded-lg border ${item.pastel}`}>
                       {item.icon}
                     </div>
-                    <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
+                    <span className="text-[10px] font-semibold text-[#697582] dark:text-[#9CA6B5]">
                       {item.category}
                     </span>
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#9299A3] group-hover:text-[#368F88] dark:group-hover:text-[#A9DED5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
-                <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 group-hover:text-slate-950 dark:group-hover:text-white transition-colors">
+                <p className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5] group-hover:text-[#368F88] dark:group-hover:text-[#A9DED5] transition-colors leading-relaxed">
                   &ldquo;{item.question}&rdquo;
                 </p>
               </div>
@@ -86,4 +90,3 @@ export function EmptyState({ onSelectQuestion, disabled = false }: EmptyStatePro
     </div>
   );
 }
-

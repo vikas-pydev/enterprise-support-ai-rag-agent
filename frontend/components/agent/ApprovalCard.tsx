@@ -58,37 +58,37 @@ export function ApprovalCard({
 
   return (
     <div
-      className={`mt-4 rounded-3xl border transition-all overflow-hidden shadow-lg ${
+      className={`mt-4 rounded-2xl border transition-colors overflow-hidden shadow-[0_1px_3px_rgba(38,49,66,0.03)] ${
         isPending
-          ? 'bg-amber-50/90 dark:bg-gradient-to-br dark:from-amber-950/40 dark:via-slate-900 dark:to-amber-950/30 border-amber-300 dark:border-amber-500/50 shadow-amber-950/10'
+          ? 'bg-[#FEF3C7]/60 dark:bg-[#393425]/40 border-[#FDE68A] dark:border-[#4A462B] ring-1 ring-[#FDE68A]/50'
           : isApproved
-          ? 'bg-emerald-50/90 dark:bg-gradient-to-br dark:from-emerald-950/40 dark:via-slate-900 dark:to-emerald-950/30 border-emerald-300 dark:border-emerald-500/40'
-          : 'bg-rose-50/90 dark:bg-gradient-to-br dark:from-rose-950/40 dark:via-slate-900 dark:to-rose-950/30 border-rose-300 dark:border-rose-500/40'
+          ? 'bg-[#CFE5D6]/50 dark:bg-[#2C3B32]/40 border-[#B7D9C2] dark:border-[#3A4D42]'
+          : 'bg-[#FDE8E8]/50 dark:bg-[#3D2525]/40 border-[#FBD5D5] dark:border-[#522828]'
       }`}
     >
       {/* Header Banner */}
-      <div className="px-5 py-4 flex items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800/80">
+      <div className="px-5 py-3.5 flex items-center justify-between gap-3 border-b border-[#E9E5DF] dark:border-[#2F3540] bg-[#FCFAF7] dark:bg-[#1B1E24]">
         <div className="flex items-center gap-3">
           <div
-            className={`p-2 rounded-2xl border ${
+            className={`p-2 rounded-xl border ${
               isPending
-                ? 'bg-amber-100 dark:bg-amber-500/10 border-amber-300 dark:border-amber-500/30 text-amber-700 dark:text-amber-400'
+                ? 'bg-[#FEF3C7] dark:bg-[#393425] border-[#FDE68A] dark:border-[#4A462B] text-[#B45309] dark:text-[#FBBF24]'
                 : isApproved
-                ? 'bg-emerald-100 dark:bg-emerald-500/10 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400'
-                : 'bg-rose-100 dark:bg-rose-500/10 border-rose-300 dark:border-rose-500/30 text-rose-700 dark:text-rose-400'
+                ? 'bg-[#CFE5D6] dark:bg-[#2C3B32] border-[#B7D9C2] dark:border-[#3A4D42] text-[#2F855A] dark:text-[#34D399]'
+                : 'bg-[#FDE8E8] dark:bg-[#3D2525] border-[#FBD5D5] dark:border-[#522828] text-[#9B1C1C] dark:text-[#F87171]'
             }`}
           >
             {isPending ? (
-              <Lock className="w-5 h-5" />
+              <Lock className="w-4 h-4" />
             ) : isApproved ? (
-              <CheckCircle2 className="w-5 h-5" />
+              <CheckCircle2 className="w-4 h-4" />
             ) : (
-              <XCircle className="w-5 h-5" />
+              <XCircle className="w-4 h-4" />
             )}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h4 className="text-xs sm:text-sm font-semibold text-[#263142] dark:text-[#EBEFF5]">
                 {isPending
                   ? 'Human Approval Required'
                   : isApproved
@@ -96,64 +96,64 @@ export function ApprovalCard({
                   : 'Operation Rejected by Operator'}
               </h4>
               <span
-                className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
+                className={`px-2 py-0.2 rounded-full text-[10px] font-semibold border ${
                   isPending
-                    ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-500/30'
+                    ? 'bg-[#FEF3C7] dark:bg-[#393425] text-[#78350F] dark:text-[#FBBF24] border-[#FDE68A] dark:border-[#4A462B]'
                     : isApproved
-                    ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/30'
-                    : 'bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-500/30'
+                    ? 'bg-[#CFE5D6] dark:bg-[#2C3B32] text-[#2F855A] dark:text-[#34D399] border-[#B7D9C2] dark:border-[#3A4D42]'
+                    : 'bg-[#FDE8E8] dark:bg-[#3D2525] text-[#9B1C1C] dark:text-[#F87171] border-[#FBD5D5] dark:border-[#522828]'
                 }`}
               >
                 {isPending ? 'HITL Gated' : isApproved ? 'Approved' : 'Rejected'}
               </span>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+            <p className="text-[11px] text-[#697582] dark:text-[#9CA6B5] mt-0.5 font-normal">
               Deterministic LangGraph checkpoint gate for sensitive enterprise queries
             </p>
           </div>
         </div>
 
         {/* Approval ID */}
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-700 dark:text-slate-300">
-          <KeyRound className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] text-[11px] font-mono text-[#263142] dark:text-[#EBEFF5]">
+          <KeyRound className="w-3 h-3 text-[#B45309] dark:text-[#FBBF24]" />
           <span className="truncate max-w-[180px]">{approvalId}</span>
         </div>
       </div>
 
       {/* Body Content */}
-      <div className="p-5 space-y-4">
+      <div className="p-4 sm:p-5 space-y-3.5">
         {/* Reason Box */}
-        <div className="p-3.5 rounded-2xl bg-white/80 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800/90 text-xs space-y-2">
+        <div className="p-3.5 rounded-xl bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] text-xs space-y-1.5">
           <div className="flex items-center justify-between gap-2">
-            <span className="font-bold text-slate-900 dark:text-slate-300 flex items-center gap-1.5">
-              <ShieldAlert className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <span className="font-semibold text-[#263142] dark:text-[#EBEFF5] flex items-center gap-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 text-[#B45309] dark:text-[#FBBF24]" />
               <span>Policy Evaluation</span>
             </span>
             {targetWorker && (
-              <span className="text-[11px] text-slate-500 dark:text-slate-400">
-                Target Worker: <strong className="text-slate-800 dark:text-slate-200">{targetWorker}</strong>
+              <span className="text-[11px] text-[#697582] dark:text-[#9CA6B5]">
+                Target Worker: <strong className="text-[#263142] dark:text-[#EBEFF5] font-semibold">{targetWorker}</strong>
               </span>
             )}
           </div>
-          <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-sans">{reason}</p>
+          <p className="text-[#263142] dark:text-[#EBEFF5] leading-relaxed font-normal">{reason}</p>
         </div>
 
         {/* Local Error */}
         {localError && (
-          <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-500/30 text-xs text-rose-800 dark:text-rose-300 flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400 flex-shrink-0" />
+          <div className="p-3 rounded-xl bg-[#FDE8E8] dark:bg-[#3D2525] border border-[#FBD5D5] dark:border-[#522828] text-xs text-[#9B1C1C] dark:text-[#F87171] flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-[#C53030] dark:text-[#F87171] flex-shrink-0" />
             <span>{localError}</span>
           </div>
         )}
 
         {/* Interactive Decision Form if Pending */}
         {isPending ? (
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-1">
             {/* Operator Notes */}
             <div>
               <label
                 htmlFor={`approval-notes-${approvalId}`}
-                className="block text-[11px] font-bold text-slate-700 dark:text-slate-400 mb-1"
+                className="block text-[11px] font-semibold text-[#263142] dark:text-[#EBEFF5] mb-1"
               >
                 Operator Notes (Optional):
               </label>
@@ -164,7 +164,7 @@ export function ApprovalCard({
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="e.g. Authorized by HR Operations Director"
                 disabled={Boolean(submittingDecision) || isLoading}
-                className="w-full px-3.5 py-2 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-xs text-slate-900 dark:text-white placeholder-slate-400 outline-none transition-all disabled:opacity-50"
+                className="w-full px-3.5 py-2 rounded-xl bg-[#FFFFFF] dark:bg-[#1B1E24] border border-[#E9E5DF] dark:border-[#2F3540] focus:border-[#368F88] focus:ring-1 focus:ring-[#368F88] text-xs text-[#263142] dark:text-[#EBEFF5] placeholder-[#9299A3] dark:placeholder-[#6E7887] outline-none transition-colors disabled:opacity-50"
               />
             </div>
 
@@ -174,7 +174,7 @@ export function ApprovalCard({
                 type="button"
                 onClick={() => handleAction('approve')}
                 disabled={Boolean(submittingDecision) || isLoading}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/20 transition-all disabled:opacity-50 cursor-pointer"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#368F88] hover:bg-[#2B7771] text-white text-xs font-semibold transition-colors disabled:opacity-50 cursor-pointer shadow-[0_1px_2px_rgba(38,49,66,0.05)]"
               >
                 {submittingDecision === 'approve' ? (
                   <>
@@ -193,7 +193,7 @@ export function ApprovalCard({
                 type="button"
                 onClick={() => handleAction('reject')}
                 disabled={Boolean(submittingDecision) || isLoading}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-rose-100 hover:bg-rose-200 dark:bg-rose-900/60 dark:hover:bg-rose-800/80 border border-rose-300 dark:border-rose-500/30 text-rose-800 dark:text-rose-200 text-xs font-bold transition-all disabled:opacity-50 cursor-pointer"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FDE8E8] hover:bg-[#FBD5D5] dark:bg-[#3D2525] dark:hover:bg-[#4A2626] border border-[#FBD5D5] dark:border-[#522828] text-[#9B1C1C] dark:text-[#F87171] text-xs font-semibold transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {submittingDecision === 'reject' ? (
                   <>
@@ -211,18 +211,18 @@ export function ApprovalCard({
           </div>
         ) : (
           /* Static Resolved View */
-          <div className="p-3 rounded-2xl bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center justify-between">
+          <div className="p-3 rounded-xl bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] text-xs text-[#697582] dark:text-[#9CA6B5] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <FileText className="w-3.5 h-3.5 text-slate-400" />
+              <FileText className="w-3.5 h-3.5 text-[#9299A3] dark:text-[#6E7887]" />
               <span>
                 Status:{' '}
-                <strong className={isApproved ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}>
+                <strong className={isApproved ? 'text-[#2F855A] dark:text-[#34D399]' : 'text-[#9B1C1C] dark:text-[#F87171]'}>
                   {isApproved ? 'Authorized' : 'Rejected'}
                 </strong>
                 {approvalNotes && ` • Notes: "${approvalNotes}"`}
               </span>
             </div>
-            <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500">
+            <span className="text-[10px] font-mono text-[#9299A3] dark:text-[#6E7887]">
               Checkpoint Thread Resolved
             </span>
           </div>
@@ -231,4 +231,3 @@ export function ApprovalCard({
     </div>
   );
 }
-

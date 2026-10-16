@@ -55,49 +55,49 @@ export function ExecutionSummary({
     switch (status) {
       case 'completed':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30">
-            <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] font-medium bg-[#CFE5D6] dark:bg-[#2C3B32] text-[#2F855A] dark:text-[#34D399] border border-[#B7D9C2] dark:border-[#3A4D42]">
+            <CheckCircle2 className="w-3 h-3 text-[#2F855A] dark:text-[#34D399]" />
             <span>Completed</span>
           </span>
         );
       case 'pending_approval':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-500/30">
-            <ShieldAlert className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] font-medium bg-[#FEF3C7] dark:bg-[#393425] text-[#78350F] dark:text-[#FBBF24] border border-[#FDE68A] dark:border-[#4A462B]">
+            <ShieldAlert className="w-3 h-3 text-[#B45309] dark:text-[#FBBF24]" />
             <span>Pending Approval</span>
           </span>
         );
       case 'approved':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-cyan-100 dark:bg-cyan-950/80 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/30">
-            <CheckCircle2 className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] font-medium bg-[#E5F5F1] dark:bg-[#1A2D2A] text-[#263142] dark:text-[#A9DED5] border border-[#C7E9E2] dark:border-[#244742]">
+            <CheckCircle2 className="w-3 h-3 text-[#368F88] dark:text-[#A9DED5]" />
             <span>Approved &amp; Resumed</span>
           </span>
         );
       case 'rejected':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-500/30">
-            <AlertCircle className="w-3 h-3 text-rose-600 dark:text-rose-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] font-medium bg-[#FDE8E8] dark:bg-[#3D2525] text-[#9B1C1C] dark:text-[#F87171] border border-[#FBD5D5] dark:border-[#522828]">
+            <AlertCircle className="w-3 h-3 text-[#C53030] dark:text-[#F87171]" />
             <span>Action Rejected</span>
           </span>
         );
       case 'max_steps_reached':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-500/30">
-            <AlertCircle className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] font-medium bg-[#FEF3C7] dark:bg-[#393425] text-[#78350F] dark:text-[#FBBF24] border border-[#FDE68A] dark:border-[#4A462B]">
+            <AlertCircle className="w-3 h-3 text-[#B45309] dark:text-[#FBBF24]" />
             <span>Max Steps Budget</span>
           </span>
         );
       case 'clarification_needed':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 border border-blue-300 dark:border-blue-500/30">
-            <HelpCircle className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] font-medium bg-[#DCE7F7] dark:bg-[#2B3A4E] text-[#2563EB] dark:text-[#60A5FA] border border-[#BFD5F2] dark:border-[#3D526D]">
+            <HelpCircle className="w-3 h-3 text-[#2563EB] dark:text-[#60A5FA]" />
             <span>Clarification Needed</span>
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+          <span className="inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] font-medium bg-[#F8F6F2] dark:bg-[#1B1E24] text-[#697582] dark:text-[#9CA6B5] border border-[#E9E5DF] dark:border-[#2F3540]">
             <span>{status}</span>
           </span>
         );
@@ -105,35 +105,35 @@ export function ExecutionSummary({
   };
 
   return (
-    <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800/80">
+    <div className="mt-4 pt-3 border-t border-[#E9E5DF] dark:border-[#2F3540] select-none">
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
         {/* Left Side: Status & Metric Chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-medium mr-1">
-            <Activity className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
+          <div className="flex items-center gap-1.5 text-[#697582] dark:text-[#9CA6B5] font-normal mr-1">
+            <Activity className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
             <span>Execution Summary:</span>
           </div>
 
           {getStatusBadge()}
 
           {/* Duration */}
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-700 dark:text-slate-300 font-mono shadow-xs">
-            <Clock className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] text-[11px] text-[#263142] dark:text-[#EBEFF5] font-mono shadow-[0_1px_2px_rgba(38,49,66,0.02)]">
+            <Clock className="w-3 h-3 text-[#368F88] dark:text-[#A9DED5]" />
             {effectiveDuration > 1000
               ? `${(effectiveDuration / 1000).toFixed(2)}s`
               : `${Math.round(effectiveDuration)}ms`}
           </span>
 
           {/* Step Count */}
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-700 dark:text-slate-300 shadow-xs">
-            <Layers className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] text-[11px] text-[#263142] dark:text-[#EBEFF5] shadow-[0_1px_2px_rgba(38,49,66,0.02)]">
+            <Layers className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
             <span>{effectiveStepCount} {effectiveStepCount === 1 ? 'tool step' : 'tool steps'}</span>
           </span>
 
           {/* RAG status */}
           {usedRag && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-500/20 text-[11px] text-cyan-800 dark:text-cyan-300">
-              <BookOpen className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#E5F5F1] dark:bg-[#1A2D2A] border border-[#C7E9E2] dark:border-[#244742] text-[11px] text-[#263142] dark:text-[#A9DED5]">
+              <BookOpen className="w-3 h-3 text-[#368F88] dark:text-[#A9DED5]" />
               <span>RAG Policy ({citationCount} {citationCount === 1 ? 'source' : 'sources'})</span>
             </span>
           )}
@@ -141,12 +141,12 @@ export function ExecutionSummary({
 
         {/* Right Side: Workers Tag */}
         {workersInvolved.size > 0 && (
-          <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-1.5 text-[11px] text-[#697582] dark:text-[#9CA6B5]">
             <span>Workers:</span>
             {Array.from(workersInvolved).map((worker) => (
               <span
                 key={worker}
-                className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700/60 font-medium"
+                className="px-1.5 py-0.2 rounded bg-[#F8F6F2] dark:bg-[#1B1E24] text-[#697582] dark:text-[#9CA6B5] border border-[#E9E5DF] dark:border-[#2F3540] font-normal"
               >
                 {worker}
               </span>
@@ -157,4 +157,3 @@ export function ExecutionSummary({
     </div>
   );
 }
-

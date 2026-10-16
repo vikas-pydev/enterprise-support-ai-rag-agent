@@ -25,86 +25,86 @@ interface ExampleCategory {
   icon: React.ReactNode;
   prompt: string;
   description: string;
-  accentColor: string;
+  pastelIcon: string;
 }
 
 const DEMO_PROMPTS: ExampleCategory[] = [
   {
     title: 'Employee Profile',
     badge: 'SQL Records',
-    icon: <UserCheck className="w-4 h-4 text-blue-500 dark:text-blue-400" />,
+    icon: <UserCheck className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />,
+    pastelIcon: 'bg-[#DCE7F7] dark:bg-[#2B3A4E] border-[#BFD5F2] dark:border-[#3D526D]',
     prompt: "Show employee E1001's information.",
     description: 'Retrieve full name, job title, department, email, and manager info',
-    accentColor: 'border-blue-200 dark:border-blue-500/30 hover:border-blue-400 dark:hover:border-blue-500/60 bg-blue-50/50 dark:bg-blue-950/20',
   },
   {
     title: 'Leave Balances',
     badge: 'SQL Balances',
-    icon: <Calendar className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />,
+    icon: <Calendar className="w-4 h-4 text-[#7C3AED] dark:text-[#A78BFA]" />,
+    pastelIcon: 'bg-[#DCCEEF] dark:bg-[#39344D] border-[#CBB8E3] dark:border-[#4A4463]',
     prompt: 'How many annual leave days does E1001 have left?',
     description: 'Check remaining PTO, total allocated days, and category breakdown',
-    accentColor: 'border-indigo-200 dark:border-indigo-500/30 hover:border-indigo-400 dark:hover:border-indigo-500/60 bg-indigo-50/50 dark:bg-indigo-950/20',
   },
   {
     title: 'Travel & Expenses',
     badge: 'SQL Expenses',
-    icon: <Plane className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />,
+    icon: <Plane className="w-4 h-4 text-[#368F88] dark:text-[#A9DED5]" />,
+    pastelIcon: 'bg-[#E5F5F1] dark:bg-[#1A2D2A] border-[#C7E9E2] dark:border-[#244742]',
     prompt: 'How much has E1001 spent on travel?',
     description: 'Analyze total claims, approved totals, and categorized expense rollups',
-    accentColor: 'border-cyan-200 dark:border-cyan-500/30 hover:border-cyan-400 dark:hover:border-cyan-500/60 bg-cyan-50/50 dark:bg-cyan-950/20',
   },
   {
     title: 'Manager Hierarchy',
     badge: 'SQL Hierarchy',
-    icon: <Users className="w-4 h-4 text-violet-500 dark:text-violet-400" />,
+    icon: <Users className="w-4 h-4 text-[#7C3AED] dark:text-[#A78BFA]" />,
+    pastelIcon: 'bg-[#DCCEEF] dark:bg-[#39344D] border-[#CBB8E3] dark:border-[#4A4463]',
     prompt: "Who is E1001's manager?",
     description: 'Direct organizational manager lookup via employee records worker',
-    accentColor: 'border-violet-200 dark:border-violet-500/30 hover:border-violet-400 dark:hover:border-violet-500/60 bg-violet-50/50 dark:bg-violet-950/20',
   },
   {
     title: 'Multi-Step Query',
     badge: 'Multi-Tool Flow',
-    icon: <GitMerge className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />,
+    icon: <GitMerge className="w-4 h-4 text-[#2F855A] dark:text-[#34D399]" />,
+    pastelIcon: 'bg-[#CFE5D6] dark:bg-[#2C3B32] border-[#B7D9C2] dark:border-[#3A4D42]',
     prompt: 'How much has E1001 spent on travel, and who is their manager?',
     description: 'Executes travel summary and manager lookup in sequential steps',
-    accentColor: 'border-emerald-200 dark:border-emerald-500/30 hover:border-emerald-400 dark:hover:border-emerald-500/60 bg-emerald-50/50 dark:bg-emerald-950/20',
   },
   {
     title: 'Cross-Domain (SQL + RAG)',
     badge: 'Cross-Domain',
-    icon: <Globe className="w-4 h-4 text-teal-500 dark:text-teal-400" />,
+    icon: <Globe className="w-4 h-4 text-[#368F88] dark:text-[#A9DED5]" />,
+    pastelIcon: 'bg-[#E5F5F1] dark:bg-[#1A2D2A] border-[#C7E9E2] dark:border-[#244742]',
     prompt: 'How much has E1001 spent on travel and what is the domestic meal allowance?',
     description: 'Combines PostgreSQL expense data with ChromaDB policy knowledge',
-    accentColor: 'border-teal-200 dark:border-teal-500/30 hover:border-teal-400 dark:hover:border-teal-500/60 bg-teal-50/50 dark:bg-teal-950/20',
   },
   {
     title: 'Human-in-the-Loop Gate',
     badge: 'HITL Approval',
-    icon: <ShieldAlert className="w-4 h-4 text-amber-500 dark:text-amber-400" />,
+    icon: <ShieldAlert className="w-4 h-4 text-[#B45309] dark:text-[#FBBF24]" />,
+    pastelIcon: 'bg-[#FEF3C7] dark:bg-[#393425] border-[#FDE68A] dark:border-[#4A462B]',
     prompt: 'Show confidential compensation details for employee E1000.',
     description: 'Triggers deterministic LangGraph authorization checkpoint for review',
-    accentColor: 'border-amber-200 dark:border-amber-500/30 hover:border-amber-400 dark:hover:border-amber-500/60 bg-amber-50/50 dark:bg-amber-950/20',
   },
 ];
 
 export function AgentEmptyState({ onSelectPrompt, disabled = false }: AgentEmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center py-6 px-2 sm:px-4 text-center max-w-4xl mx-auto space-y-6">
+    <div className="flex flex-col items-center justify-center py-6 px-2 sm:px-4 text-center max-w-4xl mx-auto space-y-6 select-none">
       {/* Top Banner */}
-      <div className="flex flex-col items-center max-w-2xl space-y-3">
-        <div className="p-3.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 shadow-lg shadow-indigo-500/10">
-          <Bot className="w-7 h-7" />
+      <div className="flex flex-col items-center max-w-2xl space-y-2.5">
+        <div className="p-3 rounded-2xl bg-[#DCCEEF] dark:bg-[#39344D] border border-[#CBB8E3] dark:border-[#4A4463] text-[#5A4384] dark:text-[#DCCEEF] shadow-[0_1px_2px_rgba(38,49,66,0.03)]">
+          <Bot className="w-6 h-6" />
         </div>
 
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-500/30 text-indigo-800 dark:text-indigo-300 mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#E5F5F1] dark:bg-[#1A2D2A] border border-[#C7E9E2] dark:border-[#244742] text-[#263142] dark:text-[#A9DED5] mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
             <span>Autonomous Tool-Calling &amp; Supervisor Architecture</span>
           </div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h3 className="text-lg sm:text-xl font-semibold text-[#263142] dark:text-[#EBEFF5] tracking-tight">
             Enterprise AI Agent Workspace
           </h3>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="mt-1.5 text-xs sm:text-sm text-[#697582] dark:text-[#9CA6B5] leading-relaxed font-normal">
             Ask the agent to retrieve employee records, evaluate leave balances, analyze travel claims, or orchestrate multi-step cross-domain workflows with verifiable evidence and human governance.
           </p>
         </div>
@@ -113,47 +113,47 @@ export function AgentEmptyState({ onSelectPrompt, disabled = false }: AgentEmpty
       {/* Categorized Demo Queries Grid */}
       <div className="w-full text-left space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#697582] dark:text-[#9CA6B5]">
             Suggested Technical Demo Inquiries
           </span>
-          <span className="text-[11px] text-slate-500 hidden sm:inline">
+          <span className="text-[11px] text-[#9299A3] dark:text-[#6E7887] hidden sm:inline font-normal">
             Click any prompt to execute immediately
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
           {DEMO_PROMPTS.map((item) => (
             <button
               key={item.title}
               type="button"
               disabled={disabled}
               onClick={() => onSelectPrompt(item.prompt)}
-              className={`text-left p-3.5 rounded-2xl border transition-all duration-200 group flex flex-col justify-between ${item.accentColor} disabled:opacity-50 cursor-pointer shadow-sm`}
+              className="text-left p-3.5 rounded-xl border border-[#E9E5DF] dark:border-[#2F3540] bg-[#FFFEFC] dark:bg-[#21252D] hover:bg-[#F8F6F2] dark:hover:bg-[#282D37] hover:border-[#A9DED5] dark:hover:border-[#368F88] transition-colors group flex flex-col justify-between disabled:opacity-50 cursor-pointer shadow-[0_1px_2px_rgba(38,49,66,0.02)]"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <div className="p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <div className={`p-1 rounded-lg border ${item.pastelIcon}`}>
                       {item.icon}
                     </div>
-                    <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-200 transition-colors">
+                    <span className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5] group-hover:text-[#368F88] dark:group-hover:text-[#A9DED5] transition-colors">
                       {item.title}
                     </span>
                   </div>
-                  <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-white dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800">
+                  <span className="px-1.5 py-0.2 rounded text-[9px] font-mono font-medium bg-[#F8F6F2] dark:bg-[#1B1E24] text-[#697582] dark:text-[#9CA6B5] border border-[#E9E5DF] dark:border-[#2F3540]">
                     {item.badge}
                   </span>
                 </div>
 
-                <div className="text-xs font-medium text-slate-800 dark:text-slate-200 mb-1.5 line-clamp-2">
+                <div className="text-xs font-medium text-[#263142] dark:text-[#EBEFF5] mb-1.5 line-clamp-2">
                   &ldquo;{item.prompt}&rdquo;
                 </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+                <div className="text-[11px] text-[#697582] dark:text-[#9CA6B5] leading-normal font-normal">
                   {item.description}
                 </div>
               </div>
 
-              <div className="mt-3 pt-2 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-end text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 gap-1">
+              <div className="mt-3 pt-2 border-t border-[#E9E5DF]/60 dark:border-[#2F3540]/60 flex items-center justify-end text-[10px] font-medium text-[#368F88] dark:text-[#A9DED5] group-hover:text-[#2B7771] gap-1">
                 <span>Run Query</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
               </div>
@@ -164,4 +164,3 @@ export function AgentEmptyState({ onSelectPrompt, disabled = false }: AgentEmpty
     </div>
   );
 }
-

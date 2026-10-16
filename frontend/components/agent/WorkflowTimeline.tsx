@@ -104,80 +104,96 @@ export function WorkflowTimeline({
     status: status === 'error' ? 'error' : 'success',
   });
 
-  const getWorkerIcon = (workerName?: string, type?: string) => {
+  const getWorkerPastelBadge = (workerName?: string, type?: string) => {
     if (type === 'supervisor') {
-      return <Compass className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />;
+      return {
+        icon: <Compass className="w-3.5 h-3.5" />,
+        container: 'bg-[#DCCEEF] text-[#5A4384] border-[#CBB8E3] dark:bg-[#39344D] dark:text-[#DCCEEF] dark:border-[#4A4463]',
+      };
     }
     if (type === 'approval') {
-      return <ShieldAlert className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />;
+      return {
+        icon: <ShieldAlert className="w-3.5 h-3.5" />,
+        container: 'bg-[#FEF3C7] text-[#B45309] border-[#FDE68A] dark:bg-[#393425] dark:text-[#FBBF24] dark:border-[#4A462B]',
+      };
     }
     if (type === 'synthesis') {
-      return <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />;
+      return {
+        icon: <Sparkles className="w-3.5 h-3.5" />,
+        container: 'bg-[#CFE5D6] text-[#2F855A] border-[#B7D9C2] dark:bg-[#2C3B32] dark:text-[#34D399] dark:border-[#3A4D42]',
+      };
     }
 
     if (workerName === 'Employee Records') {
-      return <Database className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />;
+      return {
+        icon: <Database className="w-3.5 h-3.5" />,
+        container: 'bg-[#DCE7F7] text-[#2563EB] border-[#BFD5F2] dark:bg-[#2B3A4E] dark:text-[#60A5FA] dark:border-[#3D526D]',
+      };
     }
     if (workerName === 'Travel & Expense') {
-      return <Plane className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />;
+      return {
+        icon: <Plane className="w-3.5 h-3.5" />,
+        container: 'bg-[#C7E9E2] text-[#368F88] border-[#A9DED5] dark:bg-[#1A2D2A] dark:text-[#A9DED5] dark:border-[#244742]',
+      };
     }
     if (workerName === 'HR Policy') {
-      return <BookOpen className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400" />;
+      return {
+        icon: <BookOpen className="w-3.5 h-3.5" />,
+        container: 'bg-[#DCCEEF] text-[#5A4384] border-[#CBB8E3] dark:bg-[#39344D] dark:text-[#DCCEEF] dark:border-[#4A4463]',
+      };
     }
-    return <GitBranch className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />;
+    return {
+      icon: <GitBranch className="w-3.5 h-3.5" />,
+      container: 'bg-[#F8F6F2] text-[#697582] border-[#E9E5DF] dark:bg-[#1B1E24] dark:text-[#9CA6B5] dark:border-[#2F3540]',
+    };
   };
 
   return (
-    <div className="mt-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/70 p-4 shadow-sm">
+    <div className="mt-4 rounded-xl border border-[#E9E5DF] dark:border-[#2F3540] bg-[#F8F6F2] dark:bg-[#1B1E24] p-4 shadow-[0_1px_2px_rgba(38,49,66,0.02)] select-none">
       <div className="flex items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-2">
-          <GitBranch className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-          <h4 className="text-xs font-bold text-slate-900 dark:text-white tracking-wide">
+          <GitBranch className="w-4 h-4 text-[#368F88] dark:text-[#A9DED5]" />
+          <h4 className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5] tracking-wide">
             Multi-Agent Execution Workflow
           </h4>
         </div>
-        <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+        <span className="text-[10px] font-normal text-[#697582] dark:text-[#9CA6B5] font-mono">
           {toolCallCount} tool {toolCallCount === 1 ? 'call' : 'calls'} executed
         </span>
       </div>
 
-      {/* Desktop Horizontal Flow / Mobile Vertical Timeline */}
-      <div className="hidden md:flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-thin">
+      {/* Desktop Horizontal Flow */}
+      <div className="hidden md:flex items-center gap-1.5 overflow-x-auto pb-2 pt-1 scrollbar-thin">
         {nodes.map((node, index) => {
           const isLast = index === nodes.length - 1;
+          const { icon, container } = getWorkerPastelBadge(node.workerName, node.type);
 
           return (
             <React.Fragment key={node.id}>
               {/* Node Box */}
               <div className="flex flex-col items-center flex-shrink-0">
                 <div
-                  className={`px-3 py-2 rounded-2xl border flex items-center gap-2 transition-all shadow-sm ${
-                    node.type === 'supervisor'
-                      ? 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-500/40 text-indigo-900 dark:text-indigo-200'
-                      : node.type === 'approval'
-                      ? 'bg-amber-50 dark:bg-amber-950/50 border-amber-300 dark:border-amber-500/50 text-amber-900 dark:text-amber-200 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
-                      : node.type === 'synthesis'
-                      ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-500/40 text-emerald-900 dark:text-emerald-200'
-                      : node.status === 'error'
-                      ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-500/40 text-rose-900 dark:text-rose-200'
-                      : 'bg-white dark:bg-slate-900/90 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200'
+                  className={`px-3 py-2 rounded-xl border flex items-center gap-2 transition-colors bg-[#FFFEFC] dark:bg-[#21252D] border-[#E9E5DF] dark:border-[#2F3540] text-[#263142] dark:text-[#EBEFF5] shadow-[0_1px_2px_rgba(38,49,66,0.02)] ${
+                    node.type === 'approval'
+                      ? 'ring-1 ring-[#FDE68A] dark:ring-[#4A462B]'
+                      : ''
                   }`}
                 >
-                  <div className="p-1 rounded-xl bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800">
-                    {getWorkerIcon(node.workerName, node.type)}
+                  <div className={`p-1 rounded-lg border ${container}`}>
+                    {icon}
                   </div>
                   <div className="text-left">
-                    <div className="text-[11px] font-bold tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
+                    <div className="text-[11px] font-semibold tracking-tight text-[#263142] dark:text-[#EBEFF5] whitespace-nowrap">
                       {node.label}
                     </div>
                     {node.subLabel && (
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate max-w-[130px]">
+                      <div className="text-[10px] text-[#697582] dark:text-[#9CA6B5] font-mono truncate max-w-[130px]">
                         {node.subLabel}
                       </div>
                     )}
                   </div>
                   {node.durationMs !== undefined && node.durationMs > 0 && (
-                    <span className="text-[9px] font-mono text-slate-400 ml-1">
+                    <span className="text-[9px] font-mono text-[#9299A3] dark:text-[#6E7887] ml-1">
                       {Math.round(node.durationMs)}ms
                     </span>
                   )}
@@ -186,7 +202,7 @@ export function WorkflowTimeline({
 
               {/* Connecting Arrow */}
               {!isLast && (
-                <div className="flex items-center text-slate-400 dark:text-slate-600 flex-shrink-0 px-0.5">
+                <div className="flex items-center text-[#9299A3] dark:text-[#6E7887] flex-shrink-0 px-0.5">
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               )}
@@ -199,51 +215,40 @@ export function WorkflowTimeline({
       <div className="md:hidden space-y-2 pt-1">
         {nodes.map((node, index) => {
           const isLast = index === nodes.length - 1;
+          const { icon, container } = getWorkerPastelBadge(node.workerName, node.type);
 
           return (
             <div key={node.id} className="relative pl-6">
               {/* Vertical connecting line */}
               {!isLast && (
-                <div className="absolute left-2.5 top-6 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800" />
+                <div className="absolute left-2.5 top-6 bottom-0 w-0.5 bg-[#E9E5DF] dark:bg-[#2F3540]" />
               )}
 
               {/* Step indicator dot */}
-              <div className="absolute left-1 top-2.5 w-3.5 h-3.5 rounded-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 flex items-center justify-center">
+              <div className="absolute left-1 top-2.5 w-3.5 h-3.5 rounded-full bg-[#FFFEFC] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] flex items-center justify-center">
                 <div
                   className={`w-1.5 h-1.5 rounded-full ${
                     node.status === 'error'
                       ? 'bg-rose-500'
                       : node.status === 'pending'
                       ? 'bg-amber-500'
-                      : 'bg-indigo-500'
+                      : 'bg-[#368F88]'
                   }`}
                 />
               </div>
 
               {/* Card */}
-              <div
-                className={`p-2.5 rounded-2xl border flex items-center justify-between gap-2 shadow-sm ${
-                  node.type === 'supervisor'
-                    ? 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-200 dark:border-indigo-500/30'
-                    : node.type === 'approval'
-                    ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-500/40'
-                    : node.type === 'synthesis'
-                    ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-500/30'
-                    : node.status === 'error'
-                    ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-500/30'
-                    : 'bg-white dark:bg-slate-900/80 border-slate-200 dark:border-slate-800'
-                }`}
-              >
+              <div className="p-2.5 rounded-xl border border-[#E9E5DF] dark:border-[#2F3540] bg-[#FFFEFC] dark:bg-[#21252D] flex items-center justify-between gap-2 shadow-[0_1px_2px_rgba(38,49,66,0.02)]">
                 <div className="flex items-center gap-2 min-w-0">
-                  <div className="p-1 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex-shrink-0">
-                    {getWorkerIcon(node.workerName, node.type)}
+                  <div className={`p-1 rounded-lg border flex-shrink-0 ${container}`}>
+                    {icon}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                    <div className="text-xs font-semibold text-[#263142] dark:text-[#EBEFF5] truncate">
                       {node.label}
                     </div>
                     {node.subLabel && (
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate">
+                      <div className="text-[10px] text-[#697582] dark:text-[#9CA6B5] font-mono truncate">
                         {node.subLabel}
                       </div>
                     )}
@@ -251,7 +256,7 @@ export function WorkflowTimeline({
                 </div>
 
                 {node.durationMs !== undefined && node.durationMs > 0 && (
-                  <span className="text-[10px] font-mono text-slate-400 flex-shrink-0">
+                  <span className="text-[10px] font-mono text-[#9299A3] dark:text-[#6E7887] flex-shrink-0">
                     {Math.round(node.durationMs)}ms
                   </span>
                 )}
@@ -263,4 +268,3 @@ export function WorkflowTimeline({
     </div>
   );
 }
-

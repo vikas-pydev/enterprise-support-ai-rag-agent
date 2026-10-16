@@ -55,13 +55,13 @@ export function SessionControlBar({
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3 border-b border-slate-200 dark:border-slate-800/90 bg-slate-50/80 dark:bg-slate-900/60 backdrop-blur-md">
+    <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-2.5 border-b border-[#E9E5DF] dark:border-[#2F3540] bg-[#FCFAF7] dark:bg-[#1B1E24] backdrop-blur-md select-none">
       {/* Session ID Chip with Copy */}
       <div className="flex items-center gap-2 min-w-0">
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs shadow-sm">
-          <KeyRound className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />
-          <span className="text-slate-500 dark:text-slate-400 text-[11px] font-medium hidden sm:inline">Session:</span>
-          <span className="font-mono text-indigo-600 dark:text-indigo-300 text-[11px] truncate max-w-[140px] sm:max-w-[200px]" title={sessionId}>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] text-xs shadow-[0_1px_2px_rgba(38,49,66,0.02)]">
+          <KeyRound className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5] flex-shrink-0" />
+          <span className="text-[#697582] dark:text-[#9CA6B5] text-[11px] font-normal hidden sm:inline">Session:</span>
+          <span className="font-mono text-[#263142] dark:text-[#EBEFF5] text-[11px] truncate max-w-[140px] sm:max-w-[200px]" title={sessionId}>
             {sessionId}
           </span>
           <button
@@ -69,10 +69,10 @@ export function SessionControlBar({
             onClick={handleCopy}
             title={copied ? 'Copied to clipboard' : 'Copy Session ID'}
             aria-label="Copy Session ID"
-            className="p-1 hover:text-slate-900 dark:hover:text-white text-slate-400 dark:text-slate-500 rounded transition-colors"
+            className="p-1 hover:text-[#263142] dark:hover:text-[#EBEFF5] text-[#9299A3] dark:text-[#6E7887] rounded transition-colors cursor-pointer"
           >
             {copied ? (
-              <Check className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
+              <Check className="w-3 h-3 text-[#2F855A] dark:text-[#34D399]" />
             ) : (
               <Copy className="w-3 h-3" />
             )}
@@ -80,7 +80,7 @@ export function SessionControlBar({
         </div>
 
         {messageCount > 0 && (
-          <span className="hidden md:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
+          <span className="hidden md:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-normal bg-[#F8F6F2] dark:bg-[#1B1E24] text-[#697582] dark:text-[#9CA6B5] border border-[#E9E5DF] dark:border-[#2F3540]">
             {messageCount} {messageCount === 1 ? 'turn' : 'turns'}
           </span>
         )}
@@ -93,10 +93,10 @@ export function SessionControlBar({
           type="button"
           onClick={onNewSession}
           disabled={isLoading}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium text-indigo-700 dark:text-slate-300 hover:text-indigo-900 dark:hover:text-white bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/80 border border-indigo-200 dark:border-indigo-500/30 transition-all disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium text-[#263142] dark:text-[#EBEFF5] hover:text-[#368F88] dark:hover:text-[#A9DED5] bg-[#FFFFFF] dark:bg-[#21252D] hover:bg-[#F8F6F2] dark:hover:bg-[#282D37] border border-[#E9E5DF] dark:border-[#2F3540] transition-colors disabled:opacity-50 cursor-pointer shadow-[0_1px_2px_rgba(38,49,66,0.02)]"
           title="Start a fresh conversation session with new session ID"
         >
-          <Plus className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+          <Plus className="w-3.5 h-3.5 text-[#368F88] dark:text-[#A9DED5]" />
           <span>New Session</span>
         </button>
 
@@ -106,10 +106,10 @@ export function SessionControlBar({
             type="button"
             onClick={handleClear}
             disabled={isLoading}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium transition-all disabled:opacity-50 cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium transition-colors disabled:opacity-50 cursor-pointer ${
               confirmClear
-                ? 'bg-amber-100 dark:bg-amber-950/90 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-500/50'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                ? 'bg-[#FEF3C7] dark:bg-[#393425] text-[#78350F] dark:text-[#FBBF24] border border-[#FDE68A] dark:border-[#4A462B]'
+                : 'text-[#697582] dark:text-[#9CA6B5] hover:text-[#263142] dark:hover:text-[#EBEFF5] bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] hover:bg-[#F8F6F2] dark:hover:bg-[#282D37]'
             }`}
             title="Clear all messages in this session history on backend & frontend"
           >
@@ -123,10 +123,10 @@ export function SessionControlBar({
           type="button"
           onClick={handleDelete}
           disabled={isLoading}
-          className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium transition-all disabled:opacity-50 cursor-pointer ${
+          className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium transition-colors disabled:opacity-50 cursor-pointer ${
             confirmDelete
-              ? 'bg-rose-100 dark:bg-rose-950/90 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-500/50'
-              : 'text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-rose-200 dark:hover:border-rose-900/50'
+              ? 'bg-[#FDE8E8] dark:bg-[#3D2525] text-[#9B1C1C] dark:text-[#F87171] border border-[#FBD5D5] dark:border-[#522828]'
+              : 'text-[#697582] dark:text-[#9CA6B5] hover:text-[#9B1C1C] dark:hover:text-[#F87171] bg-[#FFFFFF] dark:bg-[#21252D] border border-[#E9E5DF] dark:border-[#2F3540] hover:border-[#FBD5D5]'
           }`}
           title="Delete session thread and checkpoints from PostgreSQL / memory"
         >
@@ -137,4 +137,3 @@ export function SessionControlBar({
     </div>
   );
 }
-
