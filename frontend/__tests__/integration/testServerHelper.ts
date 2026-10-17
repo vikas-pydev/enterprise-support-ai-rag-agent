@@ -7,6 +7,7 @@
  */
 
 import { ChildProcess, spawn } from 'child_process';
+import fs from 'fs';
 import path from 'path';
 
 let serverProcess: ChildProcess | null = null;
@@ -35,9 +36,12 @@ export async function startIntegrationServer(): Promise<string> {
   // Find root directory relative to frontend
   const projectRoot = path.resolve(__dirname, '../../../');
   const isWindows = process.platform === 'win32';
-  const pythonPath = isWindows
+  const venvPython = isWindows
     ? path.join(projectRoot, '.venv', 'Scripts', 'python.exe')
     : path.join(projectRoot, '.venv', 'bin', 'python');
+  const pythonPath = fs.existsSync(venvPython)
+    ? venvPython
+    : (process.env.PYTHON_PATH || (isWindows ? 'python' : 'python3'));
   const serverScript = path.join(projectRoot, 'tests', 'integration_server.py');
 
   // Spawn test server process

@@ -19,6 +19,14 @@ class TestFastAPIService(unittest.TestCase):
     def setUpClass(cls):
         """Ensure database is seeded for API read operations if DB is available."""
         cls.client = TestClient(app)
+        try:
+            from app.vector_store import collection
+            from app.ingestion import ingest_directory
+            if collection is not None and collection.count() == 0:
+                ingest_directory("data/documents", reset=False)
+        except Exception:
+            pass
+
         cls.db_available = test_connection(DEFAULT_DB_CONFIG)
         if cls.db_available:
             try:
