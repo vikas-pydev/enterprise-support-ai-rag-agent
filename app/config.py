@@ -21,8 +21,12 @@ if not LLM_API_KEY:
     if os.getenv("CI") or os.getenv("TESTING") or os.getenv("PYTEST_CURRENT_TEST"):
         LLM_API_KEY = "mock-ci-key-testing"
     else:
-        raise ValueError(
-            "LLM_API_KEY is not set. Add it to your .env file "
-            "(GROQ_API_KEY is also accepted as a fallback)."
+        # Graceful fallback: do not crash container startup/healthcheck.
+        # Allow Uvicorn to boot so that /health, /docs, and database endpoints function.
+        import logging
+        logging.getLogger("enterprise_support").warning(
+            "WARNING: Neither LLM_API_KEY nor GROQ_API_KEY was found in environment variables. "
+            "Server will start in unconfigured mode. Set GROQ_API_KEY in your deployment dashboard."
         )
+        LLM_API_KEY = "not-configured"
 
