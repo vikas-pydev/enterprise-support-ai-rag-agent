@@ -62,7 +62,7 @@ services:
       - key: LLM_MODEL
         value: openai/gpt-oss-20b
       - key: CORS_ORIGINS
-        value: https://enterprise-support-frontend.onrender.com
+        value: https://enterprise-support-ai-rag-agent.vercel.app,https://enterprise-support-frontend.onrender.com
       # Demo seeding disabled by default in cloud production to prevent overwrites
       - key: SEED_DEMO_DATA
         value: "0"

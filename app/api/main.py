@@ -93,15 +93,20 @@ app = FastAPI(
 # Configure CORS
 cors_origins_raw = os.getenv(
     "CORS_ORIGINS",
-    "http://localhost:8501,http://127.0.0.1:8501,http://localhost:3000,http://127.0.0.1:3000",
+    "https://enterprise-support-ai-rag-agent.vercel.app,http://localhost:8501,http://127.0.0.1:8501,http://localhost:3000,http://127.0.0.1:3000",
 )
 cors_origins = [origin.strip() for origin in cors_origins_raw.split(",") if origin.strip()]
+cors_origin_regex = os.getenv(
+    "CORS_ORIGIN_REGEX",
+    r"^https:\/\/.*\.vercel\.app$|^https:\/\/.*\.onrender\.com$|^http:\/\/localhost(:\d+)?$|^http:\/\/127\.0\.0\.1(:\d+)?$",
+)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
+    allow_origin_regex=cors_origin_regex,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
