@@ -82,7 +82,11 @@ def get_default_env() -> dict:
     env["HF_HUB_OFFLINE"] = "1"
     env["TRANSFORMERS_OFFLINE"] = "1"
     env["ANONYMIZED_TELEMETRY"] = "False"
+    env["TESTING"] = "1"
+    if not env.get("LLM_API_KEY") and not env.get("GROQ_API_KEY"):
+        env["LLM_API_KEY"] = "mock-ci-key-testing"
     return env
+
 
 
 def run_tier(tier_name: str, modules: list[str], env: dict) -> tuple[int, list[str], float]:

@@ -36,18 +36,24 @@ jobs:
       - name: Run ONNX Parity Tests
         env:
           PYTHONPATH: .
+          LLM_API_KEY: mock-ci-key-testing
+          TESTING: "1"
         run: |
           python tests/test_onnx_parity.py
 
       - name: Run FastAPI Service Contract Tests
         env:
           PYTHONPATH: .
+          LLM_API_KEY: mock-ci-key-testing
+          TESTING: "1"
         run: |
           python -m unittest tests/test_api.py
 
       - name: Run Tier A Deterministic Regression Suite (23 Suites)
         env:
           PYTHONPATH: .
+          LLM_API_KEY: mock-ci-key-testing
+          TESTING: "1"
         run: |
           python tests/run_all_tests.py --tier-a
 

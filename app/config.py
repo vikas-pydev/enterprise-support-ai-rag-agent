@@ -18,7 +18,11 @@ else:
     LLM_MODEL: str = os.getenv("LLM_MODEL") or "gpt-4o-mini"
 
 if not LLM_API_KEY:
-    raise ValueError(
-        "LLM_API_KEY is not set. Add it to your .env file "
-        "(GROQ_API_KEY is also accepted as a fallback)."
-    )
+    if os.getenv("CI") or os.getenv("TESTING") or os.getenv("PYTEST_CURRENT_TEST"):
+        LLM_API_KEY = "mock-ci-key-testing"
+    else:
+        raise ValueError(
+            "LLM_API_KEY is not set. Add it to your .env file "
+            "(GROQ_API_KEY is also accepted as a fallback)."
+        )
+
